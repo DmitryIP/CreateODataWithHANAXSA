@@ -13,6 +13,23 @@ modules:
     path: c_web
     requires:
       - name: UAA-service
+      - name: c_core_xsjs_api
+        group: destinations
+        properties:
+          name: core-xsjs-backend
+          url: '~{url}'
+          forwardAuthToken: true
+  - name: c_core_xsjs
+    type: nodejs
+    path: c_core_xsjs
+    provides:
+      - name: c_core_xsjs_api
+        properties:
+          url: '${default-url}'
+    requires:
+      - name: UAA-service
+      - name: hdi_c_db
+      - name: c_db
 resources:
   - name: hdi_c_db
     parameters:
