@@ -1,6 +1,6 @@
 PROCEDURE "get_po_header_data"(
          OUT EX_TOP_3_EMP_PO_COMBINED_CNT TABLE(
-              LOGINNAME NVARCHAR(12),
+              FULLNAME NVARCHAR(256),
               CREATE_CNT INTEGER,
               CHANGE_CNT INTEGER,
               COMBINED_CNT INTEGER )  )  
@@ -25,8 +25,10 @@ po_change_cnt = SELECT COUNT(*) AS CHANGE_CNT, "HISTORY.CHANGEDBY.EMPLOYEEID" as
 GROUP BY  "HISTORY.CHANGEDBY.EMPLOYEEID";
 
 EX_TOP_3_EMP_PO_COMBINED_CNT =
-        SELECT emp.LOGINNAME, crcnt.CREATE_CNT, chcnt.CHANGE_CNT,  crcnt.CREATE_CNT +
-        chcnt.CHANGE_CNT AS COMBINED_CNT
+        SELECT "get_full_name"("NAME.FIRST", "NAME.MIDDLE", "NAME.LAST") AS FULLNAME, 
+        crcnt.CREATE_CNT, 
+        chcnt.CHANGE_CNT,  
+        crcnt.CREATE_CNT + chcnt.CHANGE_CNT AS COMBINED_CNT
             FROM "MD.Employees" as emp
             LEFT OUTER JOIN :PO_CREATE_CNT AS crcnt
              ON emp.EMPLOYEEID = crcnt.EID
