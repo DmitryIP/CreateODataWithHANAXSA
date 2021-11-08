@@ -5,12 +5,12 @@ version: 0.0.1
 modules:
   - name: c_db
     type: hdb
-    path: c_db
+    path: cp_db
     requires:
       - name: hdi_c_db
   - name: c_web
     type: html5
-    path: c_web
+    path: cp_web
     requires:
       - name: UAA-service
       - name: c_core_xsjs_api
@@ -22,7 +22,7 @@ modules:
       - name: ui5
   - name: c_core_xsjs
     type: nodejs
-    path: c_core_xsjs
+    path: cp_core_xsjs
     provides:
       - name: c_core_xsjs_api
         properties:
@@ -35,7 +35,7 @@ resources:
   - name: hdi_c_db
     parameters:
       config:
-        schema: C_DB
+        schema: CP_DB
     properties:
       hdi-container-name: '${service-name}'
     type: com.sap.xs.hdi-container
