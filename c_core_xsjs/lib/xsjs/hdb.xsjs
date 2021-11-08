@@ -13,8 +13,7 @@ let rs = conn.executeQuery(query);
 let body = "";
 for(let item of rs){
    if(item.Amount >= 500){
-	body += item.PurchaseOrderItemId + "\t" +
-			item.ProductID + "\t" + item.Amount + "\n";
+	body += `<p>${item.PurchaseOrderItemId} ${item.ProductID} ${item.Amount} </p>`;
    }
 }
 $.response.setBody(body);

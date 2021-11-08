@@ -19,6 +19,7 @@ modules:
           name: core-xsjs-backend
           url: '~{url}'
           forwardAuthToken: true
+      - name: ui5
   - name: c_core_xsjs
     type: nodejs
     path: c_core_xsjs
@@ -40,3 +41,8 @@ resources:
     type: com.sap.xs.hdi-container
   - name: UAA-service
     type: com.sap.xs.uaa-space
+  - name: ui5
+    type: org.cloudfoundry.managed-service
+    parameters:
+      service: sapui5_sb
+      service-plan: sapui5-1.60
